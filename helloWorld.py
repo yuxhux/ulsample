@@ -1,13 +1,14 @@
-# Core web app using flask
-# Download flask if you haven't
-from flask import Flask
+from flask import Flask, render_template, request, flash
+
 app = Flask(__name__)
+app.secret_key = "manbearpig_MUDMAN888"
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+@app.route("/hello")
+def index():
+	flash("what's your name?")
+	return render_template("index.html")
 
-if __name__ == '__main__':
-    app.run()
-
-# If you want to put this on the internet, use something like heroku to deploy it.
+@app.route("/greet", methods=['POST', 'GET'])
+def greeter():
+	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
+	return render_template("index.html")
