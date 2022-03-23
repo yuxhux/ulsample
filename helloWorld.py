@@ -1,11 +1,10 @@
-import web
+from flask import Flask
 
-urls = ("/.*", "hello")
-app = web.application(urls, globals())
+app = Flask(__name__)
 
-class hello:
-    def GET(self):
-        return 'Hello, world!'
+@app.route('/')
+def index():
+	return 'Hello World!'
 
 if __name__ == "__main__":
-    app.run()
+	app.run(host='0.0.0.0', debug=True)
